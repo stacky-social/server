@@ -52,7 +52,7 @@ class AfterBlockDomainFromAccountService < BaseService
   def reject_follow!(follow)
     follow.destroy
 
-    return unless follow.account.activitypub?
+    return unless follow.account.activitypub? && !follow.account.internal? # NOTE: for internal account, don't notify them that we reject their follow
 
     ActivityPub::DeliveryWorker.perform_async(Oj.dump(serialize_payload(follow, ActivityPub::RejectFollowSerializer)), @account.id, follow.account.inbox_url)
   end
