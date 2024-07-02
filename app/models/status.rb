@@ -399,20 +399,28 @@ class Status < ApplicationRecord
 
   # NOTE: function for getting various ext_flag
 
-  def reblog
+  def ext_flag_reblog_str
     append_if_not_present(ext_flag, "-reblog")
   end
 
-  def reply
+  def ext_flag_reply_str
     append_if_not_present(ext_flag, "-reply")
   end
 
-  def internal
+  def ext_flag_internal_str
     append_if_not_present(ext_flag, "-internal")
   end
 
-  delegate :reblog, :reply, :internal, to: :ext_flag, prefix: true, allow_nil: true
+  def append_if_not_present(base_string, suffix)
+    return nil unless base_string.present?
 
+    # Check if the base_string already ends with the suffix
+    if base_string.end_with?(suffix)
+      base_string
+    else
+      "#{base_string}#{suffix}"
+    end
+  end
 
   def update_status_stat!(attrs)
     return if marked_for_destruction? || destroyed?
