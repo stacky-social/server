@@ -27,6 +27,11 @@ class AccountReachFinder
   end
 
   def relay_inboxes
-    Relay.enabled.pluck(:inbox_url)
+    # NOTE: internal users should not be distributed to relays.
+    if @status.internal?
+      []
+    else
+      Relay.enabled.pluck(:inbox_url)
+    end
   end
 end

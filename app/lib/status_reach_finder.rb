@@ -10,6 +10,7 @@ class StatusReachFinder
   end
 
   def inboxes
+    puts "TOM DEBUG 826:: inboxes for status #{@status.text}, inbox = #{(reached_account_inboxes + followers_inboxes + relay_inboxes).uniq}"
     (reached_account_inboxes + followers_inboxes + relay_inboxes).uniq
   end
 
@@ -45,7 +46,7 @@ class StatusReachFinder
     @status.in_reply_to_account_id if distributable?
   end
 
-  def reblog_of_account_id
+  def reblog_of_account_id # NOTE: the user id of the rebloger.
     @status.reblog.account_id if @status.reblog?
   end
 
@@ -79,7 +80,8 @@ class StatusReachFinder
   end
 
   def relay_inboxes
-    if @status.public_visibility?
+    # NOTE: internal posts should not be distributed to relays.
+    if @status.public_visibility? && !@status.internal?
       Relay.enabled.pluck(:inbox_url)
     else
       []
