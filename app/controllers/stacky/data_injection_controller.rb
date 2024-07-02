@@ -35,13 +35,13 @@ class Stacky::DataInjectionController < ApplicationController
   def modify
     puts "TOM DEBUG::32 data injection modify endpoint reached"
     puts params
-    render json: {msg: 'Modify Successfully', params: params}
+    render json: {msg: 'Dry Run Modify Successfully', params: params}
   end
 
   def delete
     puts "TOM DEBUG::32 data injection delete endpoint reached"
     puts params
-    render json: {msg: 'Delete Successfully', params: params}
+    render json: {msg: 'Dry run Delete Successfully', params: params}
   end
 
   def inject_post(params)
