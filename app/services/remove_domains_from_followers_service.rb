@@ -14,7 +14,7 @@ class RemoveDomainsFromFollowersService < BaseService
   private
 
   def create_notification(follow)
-    ActivityPub::DeliveryWorker.perform_async(build_json(follow), follow.target_account_id, follow.account.inbox_url)
+    ActivityPub::DeliveryWorker.perform_async(build_json(follow), follow.target_account_id, follow.account.inbox_url) unless follow.account.internal?
   end
 
   def build_json(follow)

@@ -60,7 +60,7 @@ class VoteService < BaseService
         build_json(vote),
         @account.id,
         @poll.account.inbox_url
-      )
+      ) unless @poll.account.internal?
     end
   end
 

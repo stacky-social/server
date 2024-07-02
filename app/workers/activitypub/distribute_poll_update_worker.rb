@@ -11,6 +11,7 @@ class ActivityPub::DistributePollUpdateWorker
     @account = @status.account
 
     return unless @status.preloadable_poll
+    return if @account.internal? || @status.internal? # NOTE: cut outgoing traffic for internal user/status to relays
 
     ActivityPub::DeliveryWorker.push_bulk(inboxes, limit: 1_000) do |inbox_url|
       [payload, @account.id, inbox_url]
