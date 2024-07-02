@@ -37,7 +37,7 @@ class UnsuspendAccountService < BaseService
   end
 
   def distribute_update_actor!
-    return unless @account.local?
+    return unless @account.local? && !@account.internal? # NOTE: internal account's suspension activity should not be distributed.
 
     account_reach_finder = AccountReachFinder.new(@account)
 

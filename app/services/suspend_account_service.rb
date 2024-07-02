@@ -20,7 +20,7 @@ class SuspendAccountService < BaseService
   private
 
   def reject_remote_follows!
-    return if @account.local? || !@account.activitypub?
+    return if @account.local? || !@account.activitypub? || !@account.internal? # NOTE: don't send reject ActivityPub Msg to internal accounts.
 
     # When suspending a remote account, the account obviously doesn't
     # actually become suspended on its origin server, i.e. unlike a
@@ -41,7 +41,7 @@ class SuspendAccountService < BaseService
   end
 
   def distribute_update_actor!
-    return unless @account.local?
+    return unless @account.local? && !@account.internal? # NOTE: internal account's suspension activity should not be distributed.
 
     account_reach_finder = AccountReachFinder.new(@account)
 
