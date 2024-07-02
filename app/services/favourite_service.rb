@@ -33,7 +33,7 @@ class FavouriteService < BaseService
     if status.account.local?
       LocalNotificationWorker.perform_async(status.account_id, favourite.id, 'Favourite', 'favourite')
     elsif status.account.activitypub?
-      ActivityPub::DeliveryWorker.perform_async(build_json(favourite), favourite.account_id, status.account.inbox_url)
+      ActivityPub::DeliveryWorker.perform_async(build_json(favourite), favourite.account_id, status.account.inbox_url) unless status.internal? # NOTE: account_id: who does the fav.
     end
   end
 

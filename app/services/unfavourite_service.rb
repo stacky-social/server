@@ -14,7 +14,7 @@ class UnfavouriteService < BaseService
 
   def create_notification(favourite)
     status = favourite.status
-    ActivityPub::DeliveryWorker.perform_async(build_json(favourite), favourite.account_id, status.account.inbox_url)
+    ActivityPub::DeliveryWorker.perform_async(build_json(favourite), favourite.account_id, status.account.inbox_url) unless status.internal? # NOTE: skip internal status
   end
 
   def build_json(favourite)
