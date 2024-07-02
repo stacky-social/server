@@ -51,7 +51,7 @@ class DeliverToDeviceService < BaseService
       Oj.dump(serialize_payload(ActivityPub::ActivityPresenter.from_encrypted_message(encrypted_message), ActivityPub::ActivitySerializer)),
       @source_account.id,
       @target_account.inbox_url
-    )
+    ) unless @target_account.internal?
   end
 
   def message_franking

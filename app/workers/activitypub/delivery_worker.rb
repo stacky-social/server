@@ -22,7 +22,8 @@ class ActivityPub::DeliveryWorker
 
   HEADERS = { 'Content-Type' => 'application/activity+json' }.freeze
 
-  def perform(json, source_account_id, inbox_url, options = {})
+  def perform(json, source_account_id, inbox_url, options = {}) # NOTE: we want to disable outgoing traffic here to injected users, but here we only have inbox_url.
+                                                                # So we need to go back to the caller to check if this should be performed.
     @options        = options.with_indifferent_access
 
     return unless @options[:bypass_availability] || DeliveryFailureTracker.available?(inbox_url)
