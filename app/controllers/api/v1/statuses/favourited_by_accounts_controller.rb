@@ -5,7 +5,7 @@ class Api::V1::Statuses::FavouritedByAccountsController < Api::V1::Statuses::Bas
   after_action :insert_pagination_headers
 
   def index
-    cache_if_unauthenticated!
+    cache_if_unauthenticated! # NOTE: Config Cache's length, if unauth, don't want to cache it for too long
     @accounts = load_accounts
     render json: @accounts, each_serializer: REST::AccountSerializer
   end

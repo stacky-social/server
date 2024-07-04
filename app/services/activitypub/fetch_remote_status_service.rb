@@ -72,10 +72,12 @@ class ActivityPub::FetchRemoteStatusService < BaseService
     actor = ActivityPub::FetchRemoteAccountService.new.call(uri, request_id: @request_id) if actor.nil? || actor.possibly_stale?
     actor
   end
+
   def account_from_local_uri(uri)
-    actor = ActivityPub::TagManager.instance.uri_to_resource(uri, Account)
-    actor
+    ActivityPub::TagManager.instance.uri_to_resource(uri, Account)
+
   end
+
   def supported_context?
     super(@json)
   end

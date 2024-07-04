@@ -17,7 +17,7 @@ class FavouriteService < BaseService
 
     favourite = Favourite.create!(account: account, status: status)
 
-    Trends.statuses.register(status)
+    Trends.statuses.register(status) # TODO: What is Trend
 
     create_notification(favourite)
     increment_statistics

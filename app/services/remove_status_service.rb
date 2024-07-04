@@ -20,6 +20,16 @@ class RemoveStatusService < BaseService
     @account  = status.account
     @options  = options
 
+    # NOTE: Temporarily Defensive Approach
+    # Since we do not know exactly the mechanism and trigger of the Discard process (TODO)
+    # We might want to do a hard block for anything that is injected.
+    # But the key thing here is that only remote things get deleted, right? so internal can also be downgrade to injected?
+
+    if @status.internal? || @account.internal?
+      puts "TOM DEUG WARNING::Deleting Internal Post from remove_status_service.rb:call"
+      return
+    end
+
     with_redis_lock("distribute:#{@status.id}") do
       @status.discard_with_reblogs
 
