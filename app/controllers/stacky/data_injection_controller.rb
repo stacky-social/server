@@ -25,10 +25,9 @@ class Stacky::DataInjectionController < ApplicationController
     # ActivityPub::ProcessingWorker.perform_async(actor.id, body, @account&.id, signed_request_actor.class.name)
     # ActivityPub::ProcessCollectionService.new.call(@json, actor) # override_timestamps: true, delivered_to_account_id: delivered_to_account_id, delivery: true)
     # NOTE: update: Seems like this one below is on the suitable layer for us to use. Make sure prefetched_body is not empty.
-    ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, expected_actor_uri: @status_json[:performing_actor_uri], request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:performing_actor_uri]}")
+    ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:performing_actor_uri]}")
 
     # step3: TODO: return a success message to the external user.
-
     render plain: 'Inject Successfully'
   end
 

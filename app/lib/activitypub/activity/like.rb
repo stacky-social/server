@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ActivityPub::Activity::Like < ActivityPub::Activity
+  # NOTE: When remote account likes a local host, push notification to local account.
   def perform
     original_status = status_from_uri(object_uri)
 

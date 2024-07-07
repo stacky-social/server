@@ -1,0 +1,51 @@
+{
+  // For simplicity, I processed the performing_actor_uri in server's code, you can delete that field.
+    "users": [
+        {
+            "username": "EuanWard",
+            "domain": "stacky-nyt.com", // please use full uri (example: stacky-ny.com)
+            "json": {
+                "id": "https://stacky-nyt.com/EuanWard", //please also change this, be unique
+                "inbox": "https://stacky-nyt.com/user/EuanWard/fake_inbox", //better change this username as well
+                "outbox": "https://stacky-nyt.com/user/EuanWard/fake_outbox", //same, change username
+                "type": "Person", // Add this field here. use one of Application Group Organization Person Service
+                "name": "EuanWard" // IF this is set to ThomasFuller, then EuanWard will have display name as ThomasFuller.
+            }
+        },
+        {
+            "username": "ThomasFuller",
+            "domain": "stacky-nyt.com",// please use full uri (example: stacky-ny.com)
+
+            "json": {
+                "id": "https://stacky-nyt.com/ThomasFuller",
+                "inbox": "https://stacky-nyt.com/user/ThomasFuller/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/ThomasFuller/fake_outbox",
+                "type": "Person", // Add this field here. use one of Application Group Organization Person Service
+                "name": "ThomasFuller"
+            }
+        }
+    ],
+    "status": {
+        "@context": "https://www.w3.org/ns/activitystreams", // Put this field always as this content to mark that it is publicly available.
+        "id": "https://stacky-nyt.com/EuanWard/statuses/2024%07%03%world%middleeast%israel-hezbollah-commander-strike-rockets", // This should be the uri of the status/post. User can be redirected to that url by clicking "open original page". If you put a real ny times url of the post, user can be redirected. 
+        "type": "Create",
+        "actor": { // This is the Author, so in this case, it should be the uri of the user EuanWard
+            "id": "https://stacky-nyt.com/EuanWard",
+            "type": "Person", // Always use Person, other options are Application Group Organization Person Service
+            "name": "EuanWard"
+        },
+        "published": "2024-07-03T22:00:09Z",
+        "to": [
+            "https://www.w3.org/ns/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public"
+        ],
+        "cc": [],
+        "object": {
+            "id": "https://stacky-nyt.com/EuanWard/statuses/2024%07%03%world%middleeast%israel-hezbollah-commander-strike-rockets",
+            "type": "Note",
+            "attributedTo": "https://stacky-nyt.com/EuanWard",
+            "inReplyTo": "",
+            "content": "**Israel Kills a Top Commander of Hezbollah, Which Replies With a Rocket Barrage**\n\n    The escalation in violence across the border of Israel and Lebanon came as Western diplomats tried to head off a full-fledged war there.\n\n    Euan Ward and Thomas Fuller [@EuanWard,  @ThomasFuller]\n \n    https://www.nytimes.com/2024/07/03/world/middleeast/israel-hezbollah-commander-strike-rockets.html\n\n    Published: Wed, 03 Jul 2024 22:00:09 +0000\n\n #IsraelGazaWar2023 #Palestinians #DefenseandMilitaryForces #WarandArmedConflicts #FringeGroupsandMovements #BidenJosephRJr #GallantYoav #MacronEmmanuel1977 #Hamas #Hezbollah #DeathsFatalities #GazaStrip #Israel #Iran #France #Lebanon #UnitedStates #UnitedStatesInternationalRelations #InternationalRelations #DronesPilotlessPlanes #Terrorism #MissilesandMissileDefenseSystems #TerritorialDisputes"
+        }
+    }
+}
