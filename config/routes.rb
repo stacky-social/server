@@ -222,9 +222,16 @@ Rails.application.routes.draw do
   get '/privacy-policy', to: 'privacy#show', as: :privacy_policy
   get '/terms',          to: redirect('/privacy-policy')
 
-  post '/inject-data/add', to: 'stacky/data_injection#add' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") } 
-  post '/inject-data/modify/:id', to: 'stacky/data_injection#modify' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") } 
-  post '/inject-data/delete/:id', to: 'stacky/data_injection#delete' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }  
+  post '/inject-data/add', to: 'stacky/data_injection#add'  ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+  post '/inject-data/modify/:id', to: 'stacky/data_injection#modify' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+  post '/inject-data/delete/:id', to: 'stacky/data_injection#delete' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+
+  post '/inject-data/injected-favourite/incr', to: 'stacky/data_injection#increment_injected_favourite' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+  post '/inject-data/injected-favourite/decr', to: 'stacky/data_injection#decrement_injected_favourite' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+  post '/inject-data/injected-favourite/set', to: 'stacky/data_injection#set_injected_favourite_count' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+  post '/inject-data/injected-favourite/get', to: 'stacky/data_injection#injected_favourite_count' ,constraints: lambda { |request| request.remote_ip.include?("104.236.200.19") }
+
+
   match '/', via: [:post, :put, :patch, :delete], to: 'application#raise_not_found', format: false
   match '*unmatched_route', via: :all, to: 'application#raise_not_found', format: false
 end
