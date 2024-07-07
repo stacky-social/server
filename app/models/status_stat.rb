@@ -31,6 +31,7 @@ class StatusStat < ApplicationRecord
   end
 
   def stacky_injected_favourite_count
+    return 0 unless status.internal? && attributes['stacky_injected_favourite_count'].present?
     [attributes['stacky_injected_favourite_count'], 0].max
   end
 
