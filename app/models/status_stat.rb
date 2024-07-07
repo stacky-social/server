@@ -27,7 +27,7 @@ class StatusStat < ApplicationRecord
   end
 
   def favourites_count
-    [attributes['favourites_count'], 0].max
+    [attributes['favourites_count'], 0].max + (stacky_injected_favourite_count || 0)
   end
 
   def stacky_injected_favourite_count
@@ -49,3 +49,4 @@ class StatusStat < ApplicationRecord
     self.stacky_injected_favourite_count -= 1 if self.stacky_injected_favourite_count > 0
     save!
   end
+end
