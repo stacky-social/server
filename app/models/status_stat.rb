@@ -13,9 +13,10 @@
 #  updated_at                      :datetime         not null
 #  stacky_injected_favourite_count :bigint(8)
 #
-
 class StatusStat < ApplicationRecord
   belongs_to :status, inverse_of: :status_stat
+
+  validates :stacky_injected_favourite_count, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
 
   def replies_count
     [attributes['replies_count'], 0].max
@@ -28,4 +29,23 @@ class StatusStat < ApplicationRecord
   def favourites_count
     [attributes['favourites_count'], 0].max
   end
-end
+
+  def stacky_injected_favourite_count
+    [attributes['stacky_injected_favourite_count'], 0].max
+  end
+
+  def increment_stacky_injected_favourite_count
+    return unless status.internal?
+
+    self.stacky_injected_favourite_count ||= 0
+    self.stacky_injected_favourite_count += 1
+    save!
+  end
+
+  def decrement_stacky_injected_favourite_count
+    return unless status.internal?
+
+    self.stacky_injected_favourite_count ||= 0
+    self.stacky_injected_favourite_count -= 1 if self.stacky_injected_favourite_count > 0
+    save!
+  end
