@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_160318) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_07_060928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1041,6 +1041,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_160318) do
     t.bigint "favourites_count", default: 0, null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.bigint "stacky_injected_favourite_count"
     t.index ["status_id"], name: "index_status_stats_on_status_id", unique: true
   end
 
