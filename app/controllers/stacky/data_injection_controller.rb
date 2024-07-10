@@ -28,7 +28,7 @@ class Stacky::DataInjectionController < ApplicationController
     status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:performing_actor_uri]}")
 
     # step3: TODO: return a success message to the external user.
-    render json: { msg: 'Inject Successfully', id: status.id }
+    render json: { msg: 'Inject Successfully', id: status&.id }
   end
 
   def modify
@@ -45,13 +45,15 @@ class Stacky::DataInjectionController < ApplicationController
 
   def resolve_users
     return if @users.nil?
+    #TODO update user if acct changes, uri is the unique identifier.
 
     @users.each do |user_params|
       @username = user_params[:username]
       @domain = user_params[:domain]
       @json = user_params[:json]
+      uri = @json[:id]
 
-      actor ||= Account.find_remote(@username, @domain)
+      actor ||= ActivityPub::TagManager.instance.uri_to_resource(uri, Account)
       actor ||= Account.find_remote(@username, @domain)
 
       if actor.nil?
