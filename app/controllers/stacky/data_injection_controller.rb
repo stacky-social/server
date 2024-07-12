@@ -9,7 +9,12 @@ class Stacky::DataInjectionController < ApplicationController
 
     @users = params[:users] # array of users with username, domain, and json fields.
     @status_json = params[:status] # the status message to be injected.
-    @status_json[:ext_flag] = "stacky-status-injection" # add a injection_flag to the status_json to indicate that this is an injected status.
+
+    # Append the tags from status to object and add in a special hashtag: StackyInjectionPost.
+    @status_json[:object][:tag] = Array(@status_json.dig(:object, :tag)) + Array(@status_json[:tag]) + [{ type: 'Hashtag', name: 'StackyInjectionPost' }]
+
+    # add a injection_flag to the status_json to indicate that this is an injected status.
+    @status_json[:ext_flag] = "stacky-status-injection"
     # user's ext-flag is set within the special function `resolve_users` called.
 
     # step0: TODO: add an authentication method to make sure this comes from curate.
