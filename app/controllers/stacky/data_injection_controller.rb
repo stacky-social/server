@@ -10,9 +10,6 @@ class Stacky::DataInjectionController < ApplicationController
     @users = params[:users] # array of users with username, domain, and json fields.
     @status_json = params[:status] # the status message to be injected.
 
-    # Append the tags from status to object and add in a special hashtag: StackyInjectionPost.
-    @status_json[:object][:tag] = Array(@status_json.dig(:object, :tag)) + Array(@status_json[:tag]) + [{ type: 'Hashtag', name: 'StackyInjectionPost' }]
-
     # add a injection_flag to the status_json to indicate that this is an injected status.
     @status_json[:ext_flag] = "stacky-status-injection"
     # user's ext-flag is set within the special function `resolve_users` called.
@@ -21,6 +18,16 @@ class Stacky::DataInjectionController < ApplicationController
 
     # step1: check if the external user exists, if not, add it using ResolveAccountService
     resolve_users
+    major_actor = ActivityPub::TagManager.instance.uri_to_resource(@status_json[:actor][:id], Account)
+    puts "TOM DEBUG:TEST #{major_actor.domain}"
+
+    # Append the tags from status to object and add in a special hashtag: StackyInjectionPost.
+    @status_json[:object][:tag] = Array(@status_json.dig(:object, :tag)) + Array(@status_json[:tag]) + [{ type: 'Hashtag', name: 'StackyInjectionPost' }, { type: 'Hashtag', name: "StackyInjectionDomain-#{major_actor.domain}" }]
+    @status_json[:object][:tag] = if @status_json[:object][:inReplyTo].blank?
+                                    Array(@status_json.dig(:object, :tag)) + [{ type: 'Hashtag', name: 'StackyInjectionRootPost' }]
+                                  else
+                                    Array(@status_json.dig(:object, :tag)) + [{ type: 'Hashtag', name: 'StackyInjectionReplyPost' }]
+                                  end
 
     # step2: TODO: create the activitypub json file and call an existing service to insert the create status message.
     # (Bypassing the Webfinger lookup in code, as well as the authentication service)
