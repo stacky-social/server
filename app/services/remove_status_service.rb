@@ -27,7 +27,7 @@ class RemoveStatusService < BaseService
 
     if @status.internal? || @account.internal?
       puts "TOM DEUG WARNING::Deleting Internal Post from remove_status_service.rb:call"
-      return
+      return if @options[:force_internal_delete].present?
     end
 
     with_redis_lock("distribute:#{@status.id}") do

@@ -30,7 +30,7 @@ class Stacky::DataInjectionController < ApplicationController
     # ActivityPub::ProcessingWorker.perform_async(actor.id, body, @account&.id, signed_request_actor.class.name)
     # ActivityPub::ProcessCollectionService.new.call(@json, actor) # override_timestamps: true, delivered_to_account_id: delivered_to_account_id, delivery: true)
     # NOTE: update: Seems like this one below is on the suitable layer for us to use. Make sure prefetched_body is not empty.
-    status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:performing_actor_uri]}")
+    status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:object][:id]}")
 
     # step3: TODO: return a success message to the external user.
     render json: { msg: 'Inject Successfully', id: status&.id }
@@ -45,6 +45,13 @@ class Stacky::DataInjectionController < ApplicationController
   def delete
     puts "TOM DEBUG::32 data injection delete endpoint reached"
     puts params
+    @status_json = params[:status] # the status message to be injected.
+    # add a injection_flag to the status_json to indicate that this is an injected status.
+    @status_json[:ext_flag] = "stacky-status-injection"
+    # Add this flag to override the deletion protection of injected posts.
+    @status_json[:force_internal_delete] = true
+
+    status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:object][:id]}")
     render json: { msg: 'Dry run Delete Successfully', params: params }
   end
 

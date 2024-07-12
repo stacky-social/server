@@ -52,6 +52,6 @@ class ActivityPub::Activity::Delete < ActivityPub::Activity
     api_response = Stacky::CurateApiHelper.delete_index_status(@status)
     puts "DEBUG:: Delete statues from activitypub, curate api response: #{api_response}"
 
-    RemoveStatusService.new.call(@status, redraft: false)
+    RemoveStatusService.new.call(@status, redraft: false, force_internal_delete: @json[:force_internal_delete])
   end
 end
