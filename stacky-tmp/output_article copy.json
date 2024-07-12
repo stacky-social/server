@@ -1,0 +1,101 @@
+{
+    "users": [
+        {
+            "username": "LydiaPolgreen",
+            "domain": "stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/LydiaPolgreen",
+                "inbox": "https://stacky-nyt.com/user/LydiaPolgreen/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/LydiaPolgreen/fake_outbox",
+                "type": "Person",
+                "name": "LydiaPolgreen"
+            }
+        }
+    ],
+    "status": {
+        "@context": "https://www.w3.org/ns/activitystreams",
+        "id": "https://www.nytimes.com/2024/06/28/opinion/kamala-harris-biden-debate.html",
+        "type": "Create",
+        "actor": {
+            "id": "https://stacky-nyt.com/LydiaPolgreen",
+            "type": "Person",
+            "name": "LydiaPolgreen"
+        },
+        "published": "2024-06-28T19:22:40Z",
+        "to": [
+            "https://www.w3.org/ns/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public"
+        ],
+        "cc": [],
+        "object": {
+            "id": "https://www.nytimes.com/2024/06/28/opinion/kamala-harris-biden-debate.html",
+            "type": "Note",
+            "attributedTo": "https://stacky-nyt.com/LydiaPolgreen",
+            "inReplyTo": "",
+            "content": "**Kamala Harris Could Win This Election. Let Her.**\n\n        The vice president is the obvious path out of the mess Joe Biden has created.\n\n        Lydia Polgreen [@LydiaPolgreen]\n \n        https://www.nytimes.com/2024/06/28/opinion/kamala-harris-biden-debate.html\n\n        Published: Fri, 28 Jun 2024 19:22:40 +0000\n\n #PresidentialElectionof2024 #UnitedStatesPoliticsandGovernment #Television #WomenandGirls #DebatesPolitical #BlackPeople #PollsandPublicOpinion #PrimariesandCaucuses #PresidentialElectionof2020 #BidenJosephRJr #ClintonHillaryRodham #HarrisKamalaD #PoliticsandGovernment #VicePresidentsandVicePresidencyUS #Youth",
+            "tag": [
+                {
+                    "type": "Hashtag",
+                    "name": "#PresidentialElectionof2024"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#UnitedStatesPoliticsandGovernment"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#Television"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#WomenandGirls"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#DebatesPolitical"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#BlackPeople"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#PollsandPublicOpinion"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#PrimariesandCaucuses"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#PresidentialElectionof2020"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#BidenJosephRJr"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#ClintonHillaryRodham"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#HarrisKamalaD"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#PoliticsandGovernment"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#VicePresidentsandVicePresidencyUS"
+                },
+                {
+                    "type": "Hashtag",
+                    "name": "#Youth"
+                }
+            ]
+        }
+    }
+}

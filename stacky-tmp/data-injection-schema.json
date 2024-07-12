@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string" },
+          "domain": { "type": "string" },
+          "json": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string", "format": "uri" },
+              "inbox": { "type": "string", "format": "uri" },
+              "outbox": { "type": "string", "format": "uri" },
+              "type": { "type": "string", "enum": ["Application", "Group", "Organization", "Person", "Service"] },
+              "name": { "type": "string" }
+            },
+            "required": ["id", "inbox", "outbox", "type", "name"]
+          }
+        },
+        "required": ["username", "domain", "json"]
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "@context": { "type": "string", "const": "https://www.w3.org/ns/activitystreams" },
+        "id": { "type": "string", "format": "uri" },
+        "type": { "type": "string", "enum": ["Create"] },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string", "format": "uri" },
+            "type": { "type": "string", "enum": ["Person"] },
+            "name": { "type": "string" }
+          },
+          "required": ["id", "type", "name"]
+        },
+        "published": { "type": "string", "format": "date-time" },
+        "to": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        },
+        "cc": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "default": []
+        },
+        "object": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string", "format": "uri" },
+            "type": { "type": "string", "enum": ["Note"] },
+            "attributedTo": { "type": "string", "format": "uri" },
+            "inReplyTo": { "type": "string", "format": "uri" },
+            "content": { "type": "string" },
+            "tag": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string", "enum": ["Hashtag", "Mention"] },
+                  "name": { "type": "string" },
+                  "href": { "type": "string", "format": "uri" }
+                },
+                "required": ["type"]
+              }
+            }
+          },
+          "required": ["id", "type", "attributedTo", "content"]
+        }
+      },
+      "required": ["@context", "id", "type", "actor", "published", "to", "object"]
+    }
+  },
+  "required": ["users", "status"]
+}

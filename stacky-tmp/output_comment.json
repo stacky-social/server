@@ -1,0 +1,285 @@
+{
+    "users": [
+        {
+            "username": "PeterC",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/PeterC",
+                "inbox": "https://stacky-nyt.com/user/PeterC/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/PeterC/fake_outbox",
+                "type": "Person",
+                "name": "PeterC"
+            }
+        },
+        {
+            "username": "Mark",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Mark",
+                "inbox": "https://stacky-nyt.com/user/Mark/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Mark/fake_outbox",
+                "type": "Person",
+                "name": "Mark"
+            }
+        },
+        {
+            "username": "Deborah",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Deborah",
+                "inbox": "https://stacky-nyt.com/user/Deborah/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Deborah/fake_outbox",
+                "type": "Person",
+                "name": "Deborah"
+            }
+        },
+        {
+            "username": "jaypee",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/jaypee",
+                "inbox": "https://stacky-nyt.com/user/jaypee/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/jaypee/fake_outbox",
+                "type": "Person",
+                "name": "jaypee"
+            }
+        }
+    ],
+    "status": {
+        "@context": "https://www.w3.org/ns/activitystreams",
+        "id": "https://stacky-nyt.com/PeterC/statuses/134237098",
+        "type": "Create",
+        "actor": {
+            "id": "https://stacky-nyt.com/PeterC/statuses/134237098",
+            "type": "Person",
+            "name": "PeterC"
+        },
+        "published": "",
+        "to": [
+            "https://www.w3.org/ns/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public"
+        ],
+        "cc": [],
+        "object": {
+            "id": "https://stacky-nyt.com/PeterC/statuses/134237098",
+            "type": "Note",
+            "attributedTo": "https://stacky-nyt.com/PeterC",
+            "inReplyTo": "https://stacky-nyt.com/LydiaPolgreen/statuses/2024%06%28%opinion%kamala-harris-biden-debate",
+            "content": "There are no limits to how many terms a person can serve as vice-president.\n\nRather than rending our clothes and nashing our teeth over Biden's performance last night, there is one way to look at this that could change everything.\n\nPolls have shown that both men are rated as \"too old\". One party is stuck like super-glue to their debased, vile, immoral candidate. They would never trade out trump, and his old age, in a million years.\n\nIf Joe (a good man and a great President) really wants his party to win this election, he could take one for the team, and agree to become the most experienced vice-president in history. His supporters would be in awe of the sacrificial move.\n\nWe then search for a replacement among the names that are being thrown around. I propose Gavin Newsom. He's young, telegenic, an incredible debater, and experienced. Did I mention young?\n\nLet's now imagine Newsom being the candidate, and the final debate he would engage in with a terrified trump. trump would do everything in his power to avoid one against this formidable foe. Imagine the optics. But if it did happen, imagine how Bubba trump shrimp would be eviscerated by Newsom. Why he would barbecue it, boil it, broil it, bake it, saut\u00e9 it. There's shrimp-kabobs, shrimp creole, shrimp gumbo. Pan fried, deep fried, stir-fried, etc.\n\nIt would without doubt be an easy win. The undecideds and independents would go for the Dems. Give Kamala a position in the new hybrid admin. Sacrifices must be made by all."
+        },
+        "tags": []
+    }
+},{
+    "users": [
+        {
+            "username": "PeterC",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/PeterC",
+                "inbox": "https://stacky-nyt.com/user/PeterC/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/PeterC/fake_outbox",
+                "type": "Person",
+                "name": "PeterC"
+            }
+        },
+        {
+            "username": "Mark",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Mark",
+                "inbox": "https://stacky-nyt.com/user/Mark/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Mark/fake_outbox",
+                "type": "Person",
+                "name": "Mark"
+            }
+        },
+        {
+            "username": "Deborah",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Deborah",
+                "inbox": "https://stacky-nyt.com/user/Deborah/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Deborah/fake_outbox",
+                "type": "Person",
+                "name": "Deborah"
+            }
+        },
+        {
+            "username": "jaypee",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/jaypee",
+                "inbox": "https://stacky-nyt.com/user/jaypee/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/jaypee/fake_outbox",
+                "type": "Person",
+                "name": "jaypee"
+            }
+        }
+    ],
+    "status": {
+        "@context": "https://www.w3.org/ns/activitystreams",
+        "id": "https://stacky-nyt.com/Mark/statuses/134237257",
+        "type": "Create",
+        "actor": {
+            "id": "https://stacky-nyt.com/Mark/statuses/134237257",
+            "type": "Person",
+            "name": "Mark"
+        },
+        "published": "",
+        "to": [
+            "https://www.w3.org/ns/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public"
+        ],
+        "cc": [],
+        "object": {
+            "id": "https://stacky-nyt.com/Mark/statuses/134237257",
+            "type": "Note",
+            "attributedTo": "https://stacky-nyt.com/Mark",
+            "inReplyTo": "",
+            "content": "@PeterC \n\nYes, please, run Gavin Newsom.  He will lose almost, but not quite, as fast as Biden and I would relish that.  He is popular and relevant nowhere outside of Los Angeles and Frisco.  And maybe parts of Marin County.\n\nI have to deal with him as governor.  I can't abide the thought of him as president."
+        },
+        "tags": []
+    }
+},{
+    "users": [
+        {
+            "username": "PeterC",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/PeterC",
+                "inbox": "https://stacky-nyt.com/user/PeterC/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/PeterC/fake_outbox",
+                "type": "Person",
+                "name": "PeterC"
+            }
+        },
+        {
+            "username": "Mark",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Mark",
+                "inbox": "https://stacky-nyt.com/user/Mark/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Mark/fake_outbox",
+                "type": "Person",
+                "name": "Mark"
+            }
+        },
+        {
+            "username": "Deborah",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Deborah",
+                "inbox": "https://stacky-nyt.com/user/Deborah/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Deborah/fake_outbox",
+                "type": "Person",
+                "name": "Deborah"
+            }
+        },
+        {
+            "username": "jaypee",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/jaypee",
+                "inbox": "https://stacky-nyt.com/user/jaypee/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/jaypee/fake_outbox",
+                "type": "Person",
+                "name": "jaypee"
+            }
+        }
+    ],
+    "status": {
+        "@context": "https://www.w3.org/ns/activitystreams",
+        "id": "https://stacky-nyt.com/Deborah/statuses/134238910",
+        "type": "Create",
+        "actor": {
+            "id": "https://stacky-nyt.com/Deborah/statuses/134238910",
+            "type": "Person",
+            "name": "Deborah"
+        },
+        "published": "",
+        "to": [
+            "https://www.w3.org/ns/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public"
+        ],
+        "cc": [],
+        "object": {
+            "id": "https://stacky-nyt.com/Deborah/statuses/134238910",
+            "type": "Note",
+            "attributedTo": "https://stacky-nyt.com/Deborah",
+            "inReplyTo": "",
+            "content": "@PeterC As a resident of California, I admire Gavin Newsom. But he is too liberal to attract voters in battleground states such as Pennsylvania and Michigan. That's why I believe President Biden should step aside, and Josh Shapiro of Pennsylvania and Gretchen Witmer of Michigan should become the nominees."
+        },
+        "tags": []
+    }
+},{
+    "users": [
+        {
+            "username": "PeterC",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/PeterC",
+                "inbox": "https://stacky-nyt.com/user/PeterC/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/PeterC/fake_outbox",
+                "type": "Person",
+                "name": "PeterC"
+            }
+        },
+        {
+            "username": "Mark",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Mark",
+                "inbox": "https://stacky-nyt.com/user/Mark/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Mark/fake_outbox",
+                "type": "Person",
+                "name": "Mark"
+            }
+        },
+        {
+            "username": "Deborah",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/Deborah",
+                "inbox": "https://stacky-nyt.com/user/Deborah/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/Deborah/fake_outbox",
+                "type": "Person",
+                "name": "Deborah"
+            }
+        },
+        {
+            "username": "jaypee",
+            "domain": "https://stacky-nyt.com",
+            "json": {
+                "id": "https://stacky-nyt.com/jaypee",
+                "inbox": "https://stacky-nyt.com/user/jaypee/fake_inbox",
+                "outbox": "https://stacky-nyt.com/user/jaypee/fake_outbox",
+                "type": "Person",
+                "name": "jaypee"
+            }
+        }
+    ],
+    "status": {
+        "@context": "https://www.w3.org/ns/activitystreams",
+        "id": "https://stacky-nyt.com/jaypee/statuses/134243799",
+        "type": "Create",
+        "actor": {
+            "id": "https://stacky-nyt.com/jaypee/statuses/134243799",
+            "type": "Person",
+            "name": "jaypee"
+        },
+        "published": "",
+        "to": [
+            "https://www.w3.org/ns/activitystreams#Public",
+            "https://stacky-nyt.com/activitystreams#Public"
+        ],
+        "cc": [],
+        "object": {
+            "id": "https://stacky-nyt.com/jaypee/statuses/134243799",
+            "type": "Note",
+            "attributedTo": "https://stacky-nyt.com/jaypee",
+            "inReplyTo": "",
+            "content": "@Deborah Too white a ticket like that  and you lose a chunk of the base."
+        },
+        "tags": []
+    }
+}
