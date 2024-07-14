@@ -1,0 +1,11 @@
+{
+  "status": {
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "id": "https://my-reddit.com/tom_from_reddit/statuses/777",
+    "type": "Delete",
+    "actor": {
+      "id": "https://my-reddit.com/tom_from_reddit"
+    }
+  }
+}
+
