@@ -127,7 +127,7 @@ class ActivityPub::ProcessAccountService < BaseService
     #
     # after_protocol_change! if protocol_changed?
     # after_key_change! if key_changed? && !@options[:signed_with_known_key]
-    # clear_tombstones! if key_changed?
+    clear_tombstones! if key_changed? || @options[:stacky_bypass_tombstone].present?
     # after_suspension_change! if suspension_changed?
     #
     # unless @options[:only_key] || @account.suspended?
@@ -168,7 +168,7 @@ class ActivityPub::ProcessAccountService < BaseService
     set_immediate_protocol_attributes!
     set_fetchable_key! unless @account.suspended? && @account.suspension_origin_local?
     set_immediate_attributes! unless @account.suspended?
-    set_fetchable_attributes! unless @options[:only_key] || @account.suspended?
+    set_fetchable_attributes! unless @options[:only_key] || @account.suspended? || @account.injected?
 
     @account.save_with_optional_media!
   end

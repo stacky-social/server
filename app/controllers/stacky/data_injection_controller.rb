@@ -29,18 +29,22 @@ class Stacky::DataInjectionController < ApplicationController
                                     Array(@status_json.dig(:object, :tag)) + [{ type: 'Hashtag', name: 'StackyInjectionReplyPost' }]
                                   end
 
-    # step2: TODO: create the activitypub json file and call an existing service to insert the create status message.
+    # step2: create the activitypub json file and call an existing service to insert the create status message.
     # (Bypassing the Webfinger lookup in code, as well as the authentication service)
-    # TODO: check if this should be the same @json as the one that is used for user injection.
-    # TODO: Also there should be some regulations on the actor's inbox url. in order to successfully deliver the status. (For replys especially)
-    # for other injected posts, maybe we can keep it system wise.
+
+    # first clear the tombstone for reinjection
+
     # ActivityPub::ProcessingWorker.perform_async(actor.id, body, @account&.id, signed_request_actor.class.name)
     # ActivityPub::ProcessCollectionService.new.call(@json, actor) # override_timestamps: true, delivered_to_account_id: delivered_to_account_id, delivery: true)
     # NOTE: update: Seems like this one below is on the suitable layer for us to use. Make sure prefetched_body is not empty.
     status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:object][:id]}")
 
     # step3: TODO: return a success message to the external user.
-    render json: { msg: 'Inject Successfully', id: status&.id }
+    if status.nil?
+      render json: { msg: 'Inject Failed', error: 'Unknown formatting error' }, status: 404
+    else
+      render json: { msg: 'Inject Successfully', id: status&.id }
+    end
   end
 
   def modify
@@ -56,28 +60,46 @@ class Stacky::DataInjectionController < ApplicationController
     # add a injection_flag to the status_json to indicate that this is an injected status.
     @status_json[:ext_flag] = "stacky-status-injection"
     # Add this flag to override the deletion protection of injected posts.
-    @status_json[:force_internal_delete] = true
+    @status_json[:stacky_force_internal_delete] = true
 
-    status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-injected-status-#{@status_json[:object][:id]}")
-    render json: { msg: 'Dry run Delete Successfully', params: params }
+
+    # Add the object's id field if it is not present.
+    if @status_json[:object].nil?
+      @status_json[:object] = {}
+      @status_json[:object][:id] = @status_json[:id]
+    end
+
+    if @status_json[:type] == 'Delete'
+      status = ActivityPub::FetchRemoteStatusService.new.call(@status_json[:id], prefetched_body: @status_json, request_id: "#{Time.now.utc.to_i}-delete-injected-status-#{@status_json[:id]}")
+      if status.nil?
+        render json: { msg: 'Delete Failed', error: 'Status not found or unknown formatting error' }, status: 404
+      else
+        render json: { msg: 'Delete Successfully', id: status&.id }
+      end
+    else
+      render json: { msg: 'Delete Failed', error: 'Not a delete status' }, status: 422
+    end
   end
 
   def resolve_users
     return if @users.nil?
+
     #TODO update user if acct changes, uri is the unique identifier.
 
     @users.each do |user_params|
       @username = user_params[:username]
       @domain = user_params[:domain]
       @json = user_params[:json]
-      uri = @json[:id]
 
+      # NOTE: We don't check if the account exists because we want to also update the account if it exists. (Clearing the tombstone for reinjection mainly)
+      # Update: Now we just create the account if it doesn't exist. Since tombstone will not be created.
+      uri = @json[:id]
       actor ||= ActivityPub::TagManager.instance.uri_to_resource(uri, Account)
       actor ||= Account.find_remote(@username, @domain)
 
       if actor.nil?
         # create the account
-        ActivityPub::ProcessAccountService.new.stacky_inject_data_call(@username, @domain, @json)
+        ActivityPub::ProcessAccountService.new.stacky_inject_data_call(@username, @domain, @json, stacky_bypass_tombstone: true)
         # actor ||= Account.find_remote(@username, @domain) # This should work now as the account is created.
       end
     end

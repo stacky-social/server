@@ -28,10 +28,14 @@ class ActivityPub::FetchRemoteStatusService < BaseService
       actor_uri     = value_or_id(first_of_value(@json['attributedTo']))
       activity_json = { 'type' => 'Create', 'actor' => actor_uri, 'object' => @json }
       object_uri    = uri_from_bearcap(@json['id'])
-    elsif expected_activity_type? # NOTE: this should be our data injection branch
+    elsif expected_activity_type? # NOTE: this should be our data injection branch since @json['type'] is Create not Note. meaning we are not just passing in the object.
       actor_uri     = value_or_id(first_of_value(@json['actor']))
       activity_json = @json
       object_uri    = uri_from_bearcap(value_or_id(@json['object']))
+    elsif equals_or_includes_any?(@json['type'], %w(Delete)) && @json[:ext_flag].present? # NOTE: this is the branch for the delete injection endpoint.
+      actor_uri = value_or_id(first_of_value(@json['actor']))
+      activity_json = @json
+      object_uri = "placeholder_uri_for_delete_injection"
     end
 
     return if activity_json.nil? || object_uri.nil? || (!trustworthy_attribution?(@json['id'], actor_uri) && @json['ext_flag'].nil?)

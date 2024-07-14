@@ -21,7 +21,7 @@ class ActivityPub::Activity::Delete < ActivityPub::Activity
     return if object_uri.nil?
 
     with_redis_lock("delete_status_in_progress:#{object_uri}", raise_on_failure: false) do
-      unless non_matching_uri_hosts?(@account.uri, object_uri)
+      unless non_matching_uri_hosts?(@account.uri, object_uri) || @json[:stacky_force_internal_delete].present? # NOTE: don't create a tombstone if the delete is from the data injection endpoint.
         # This lock ensures a concurrent `ActivityPub::Activity::Create` either
         # does not create a status at all, or has finished saving it to the
         # database before we try to load it.
@@ -52,6 +52,6 @@ class ActivityPub::Activity::Delete < ActivityPub::Activity
     api_response = Stacky::CurateApiHelper.delete_index_status(@status)
     puts "DEBUG:: Delete statues from activitypub, curate api response: #{api_response}"
 
-    RemoveStatusService.new.call(@status, redraft: false, force_internal_delete: @json[:force_internal_delete])
+    RemoveStatusService.new.call(@status, redraft: false, stacky_force_internal_delete: @json[:stacky_force_internal_delete]) # NOTE: the @json[:force_internal_delete] is a tag added if the delete injection data endpoint is called.
   end
 end

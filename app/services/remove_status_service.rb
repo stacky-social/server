@@ -27,14 +27,17 @@ class RemoveStatusService < BaseService
 
     if @status.internal? || @account.internal?
       puts "TOM DEUG WARNING::Deleting Internal Post from remove_status_service.rb:call"
-      return if @options[:force_internal_delete].present?
+      return if @options[:stacky_force_internal_delete].blank? # NOTE: don't return if this is an intentional move made by the deletion endpoint.
+    elsif @options[:stacky_force_internal_delete].present?
+      return # NOTE: if the deletion endpoint ask to return a post that is not internal/injected, then don't allow it.
     end
 
     with_redis_lock("distribute:#{@status.id}") do
-      @status.discard_with_reblogs
+      @status.discard_with_reblogs # NOTE: Update deleted_at field of all reblog of and the original post.
 
-      StatusPin.find_by(status: @status)&.destroy
+      StatusPin.find_by(status: @status)&.destroy # NOTE: Guess: Remove the Pin if account Pinned this status before.
 
+      # NOTE: Unpushing from home timeline of (self, followers, and lists)
       remove_from_self if @account.local?
       remove_from_followers
       remove_from_lists
@@ -58,7 +61,7 @@ class RemoveStatusService < BaseService
         remove_media
       end
 
-      @status.destroy! if permanently?
+      @status.destroy! if permanently? # NOTE: the status still lives in database, but it's marked as deleted.
 
 
     end

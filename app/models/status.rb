@@ -369,7 +369,7 @@ class Status < ApplicationRecord
 
   def discard_with_reblogs
     discard_time = Time.current
-    Status.unscoped.where(reblog_of_id: id, deleted_at: [nil, deleted_at]).in_batches.update_all(deleted_at: discard_time) unless reblog?
+    Status.unscoped.where(reblog_of_id: id, deleted_at: [nil, deleted_at]).in_batches.update_all(deleted_at: discard_time) unless reblog? # NOTE: update the deleted_at field of all the reblog of the deleted status. (unless this post itself is a reblog)
     update_attribute(:deleted_at, discard_time)
   end
 
