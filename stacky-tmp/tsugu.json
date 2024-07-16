@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "username": "TsugunobuMiyake",
+      "domain": "stacky-tsugu.com",
+      "json": {
+        "id": "https://stacky-tsugu.com/TsugunobuMiyake",
+        "inbox": "https://stacky-tsugu.com/user/TsugunobuMiyake/fake_inbox",
+        "outbox": "https://stacky-tsugu.com/user/TsugunobuMiyake/fake_outbox",
+        "type": "Person",
+        "name": "TsugunobuMiyake"
+      }
+    }
+  ],
+  "status": {
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "id": "https://example.com/index7.html",
+    "type": "Create",
+    "actor": {
+      "id": "https://stacky-tsugu.com/TsugunobuMiyake",
+      "type": "Person",
+      "name": "TsugunobuMiyake"
+    },
+    "published": "2024-06-28T19:22:40Z",
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public",
+      "https://stacky-tsugu.com/activitystreams#Public"
+    ],
+    "cc": [],
+    "object": {
+      "id": "https://example.com/index7.html",
+      "type": "Note",
+      "attributedTo": "https://stacky-tsugu.com/TsugunobuMiyake",
+      "inReplyTo": "https://example.com/index23.html",
+      "content": "Test a reply from Tsugu",
+      "tag": [
+	{
+		"type": "Hashtag",
+		"name": "#StackyTestInjection"
+	}
+      ]
+    }
+  }
+}
