@@ -17,8 +17,16 @@ class Stacky::DataInjectionController < ApplicationController
     # step0: TODO: add an authentication method to make sure this comes from curate.
 
     # step1: check if the external user exists, if not, add it using ResolveAccountService
+    if validate_user_params == false
+      render json: { msg: 'Inject Failed', error: 'User field Error, username or domain is not in lower case' }, status: 422
+      return
+    end
     resolve_users
     major_actor = ActivityPub::TagManager.instance.uri_to_resource(@status_json[:actor][:id], Account)
+    if major_actor.nil?
+      render json: { msg: 'Inject Failed', error: 'Actor field Error, actor field can\'t be find by uri' }, status: 404
+      return
+    end
     puts "TOM DEBUG:TEST #{major_actor.domain}"
 
     # Append the tags from status to object and add in a special hashtag: StackyInjectionPost.
@@ -88,6 +96,8 @@ class Stacky::DataInjectionController < ApplicationController
 
     @users.each do |user_params|
       @username = user_params[:username]
+      # check if the username is lower cased.
+      @username = @username.downcase if @username != @username.downcase
       @domain = user_params[:domain]
       @json = user_params[:json]
 
@@ -105,6 +115,23 @@ class Stacky::DataInjectionController < ApplicationController
     end
   end
 
+  def validate_user_params
+    return if @users.nil?
+
+    @users.each do |user_params|
+      @username = user_params[:username]
+      # check if the username is lower cased.
+      return false if @username != @username.downcase
+
+      @domain = user_params[:domain]
+
+      return false if @domain != @domain.downcase
+
+      @json = user_params[:json]
+    end
+    true
+
+  end
   # The following methods are for injecting favourites
 
   def increment_injected_favourite
