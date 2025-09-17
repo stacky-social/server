@@ -3,7 +3,7 @@
 port = ENV.fetch('PORT') { 3000 }
 streaming_port = ENV.fetch('STREAMING_PORT') { 4000 }
 host     = ENV.fetch('LOCAL_DOMAIN') { "127.0.0.1:#{port}" }
-web_host = ENV.fetch('WEB_DOMAIN') { "beta.stacky.social:#{port}" } # TODO: hardcoded to our server ip. (Should try if 127.0.0.1 will work on prod) SO need to open up ports!
+web_host = ENV.fetch('WEB_DOMAIN') { "beta.stacky.social" } # TODO: hardcoded to our server ip. (Should try if 127.0.0.1 will work on prod) SO need to open up ports!
 
 alternate_domains = ENV.fetch('ALTERNATE_DOMAINS') { '' }.split(/\s*,\s*/)
 
