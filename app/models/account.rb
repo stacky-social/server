@@ -505,8 +505,9 @@ class Account < ApplicationRecord
     ext_flag.present?
   end
 
+  # app/models/account.rb
   def injected?
-    ext_flag.include? 'injection'
+    ext_flag.to_s.include?('injection')   # nil -> "" so returns false
   end
 
   def marked_internal?
